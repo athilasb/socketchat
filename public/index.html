@@ -20,7 +20,7 @@
     </form>
 
     <script type="text/javascript">
-        var socket = io("https://chat.athila.dev");
+        var socket = io("https://chat.athila.dev:443");
         function renderMessage(mensage) {
             $(".messages").append(`<p class="message"><strong>ID: ${mensage.id}</strong> | <strong>${mensage.autor}</strong>: ${mensage.message}</p>`);
         }
