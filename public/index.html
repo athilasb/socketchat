@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>chat</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -20,7 +20,7 @@
     </form>
 
     <script type="text/javascript">
-        var socket = io("/");
+        var socket = io();
         function renderMessage(mensage) {
             $(".messages").append(`<p class="message"><strong>ID: ${mensage.id}</strong> | <strong>${mensage.autor}</strong>: ${mensage.message}</p>`);
         }
@@ -39,11 +39,10 @@
                     autor: author,
                     message: message
                 };
-                renderMessage({ id: socket.id, ...mensageObject }); // Inclui o ID do socket no objeto mensageObject
+                renderMessage({ id: socket.id, ...mensageObject });
                 socket.emit("sendMessage", mensageObject);
             }
-        })
-
+        });
     </script>
 </body>
 

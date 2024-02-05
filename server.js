@@ -12,7 +12,7 @@ app.set('views', path.join(__dirname, 'public'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
     res.render('index.html');
 });
 
@@ -21,12 +21,15 @@ io.on('connection', socket => {
     socket.on('sendMessage', data => {
         messages.push({
             id: socket.id,
-            message: data.message, // Pega a mensagem da propriedade 'message' do objeto data
-            autor: data.autor // Pega o autor da propriedade 'autor' do objeto data
+            message: data.message,
+            autor: data.autor
         });
 
-        io.emit('receivedMessage', { id: socket.id, ...data }); // Inclui o ID do socket no objeto data
-    })
-})
+        io.emit('receivedMessage', { id: socket.id, ...data });
+    });
+});
 
-server.listen(3002);
+const port = process.env.PORT || 3002;
+server.listen(port, () => {
+    console.log(`Servidor rodando na porta ${port}`);
+});
