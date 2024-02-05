@@ -20,7 +20,7 @@
     </form>
 
     <script type="text/javascript">
-        var socket = io("/3002");
+        var socket = io("76.76.21.9:443");
         function renderMessage(mensage) {
             $(".messages").append(`<p class="message"><strong>ID: ${mensage.id}</strong> | <strong>${mensage.autor}</strong>: ${mensage.message}</p>`);
         }
