@@ -3,8 +3,12 @@ const path = require('path');
 const cors = require('cors'); // Importe o middleware cors
 
 const app = express();
-const server = require('https').createServer(app);
-const io = require('socket.io')(server);
+const server = require('http').createServer(app);
+const io = require('socket.io')(server,{
+    cors: {
+        origin: "*",
+    }
+});
 
 const messages = [];
 
