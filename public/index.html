@@ -14,13 +14,13 @@
 <body>
     <form id="chat">
         <input type="text" name="username" placeholder="digite seu usuario">
-        <div class="messages"></div>
+        <div class="messages" style="overflow-y: scroll;"></div>
         <input type="text" name="message" placeholder="digite sua mensagem">
         <button type="submit">Enviar</button>
     </form>
 
     <script type="text/javascript">
-        var socket = io("https://chat.athila.dev");
+        var socket = io();
 
         function renderMessage(mensage) {
             $(".messages").append(`<p class="message"><strong>ID: ${mensage.id}</strong> | <strong>${mensage.autor}</strong>: ${mensage.message}</p>`);
@@ -42,6 +42,9 @@
                 };
                 socket.emit("sendMessage", mensageObject);
             }
+            
+            $("input[name=message]").val("");
+
         });
     </script>
 </body>
